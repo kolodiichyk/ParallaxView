@@ -23,6 +23,9 @@ jobs:
       with:
         dotnet-version: '9.0.x'
 
+    - name: 'Restore workload'
+      run: dotnet workload restore ${{ env.PROJECT_PATH }}
+
     - name: 'Restore packages'
       run: dotnet restore ${{ env.PROJECT_PATH }}
 
