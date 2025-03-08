@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31611.283
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallaxView.Example", "ParallaxView.Example\ParallaxView.Example.csproj", "{5BE76B74-2684-40F6-9D33-AAB8FFD439BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallaxView", "ParallaxView\ParallaxView.csproj", "{47282773-B17D-45D7-9F1E-79E2C9190A20}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5BE76B74-2684-40F6-9D33-AAB8FFD439BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BE76B74-2684-40F6-9D33-AAB8FFD439BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BE76B74-2684-40F6-9D33-AAB8FFD439BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BE76B74-2684-40F6-9D33-AAB8FFD439BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47282773-B17D-45D7-9F1E-79E2C9190A20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47282773-B17D-45D7-9F1E-79E2C9190A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47282773-B17D-45D7-9F1E-79E2C9190A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47282773-B17D-45D7-9F1E-79E2C9190A20}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61F7FB11-1E47-470C-91E2-47F8143E1572}
+	EndGlobalSection
+EndGlobal
