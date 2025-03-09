@@ -7,7 +7,7 @@
     <ScrollView x:Name="ParentScrollView">
         <VerticalStackLayout>
             <example:CityParallaxView Source="{Binding Source={x:Reference ParentScrollView}}" />
-            <Border HeightRequest="1024" />
+            <ContentView HeightRequest="1024" />
         </VerticalStackLayout>
     </ScrollView>
 

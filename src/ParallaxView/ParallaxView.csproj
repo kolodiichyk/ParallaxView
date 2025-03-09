@@ -13,7 +13,7 @@
         <Authors>Andrii Kolodiichyk</Authors>
         <Product>ParallaxView for .net MAIU</Product>
         <PackageProjectUrl>https://github.com/kolodiichyk/ParallaxView</PackageProjectUrl>
-        
+
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
