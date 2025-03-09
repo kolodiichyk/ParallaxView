@@ -1,22 +1,18 @@
 using Microsoft.Maui.Layouts;
+using ParallaxView.Extensions;
 
 namespace ParallaxView;
 
 [ContentProperty(nameof(Children))]
-public class ParallaxView : Layout, IDisposable
+public partial class ParallaxView : Layout, IDisposable
 {
-    private const double _defaultSpeed = 1.0;
-
     protected override ILayoutManager CreateLayoutManager() => new ParallaxViewLayoutManager(this);
 
-    public static readonly BindableProperty SpeedProperty =
-        BindableProperty.CreateAttached("Speed", typeof(double), typeof(ParallaxView), _defaultSpeed,
-            propertyChanged: OnSpeedPropertyChanged);
 
     public static BindableProperty SourceProperty = BindableProperty.Create(nameof(Source),
         typeof(View), typeof(ParallaxView), propertyChanged: OnSourcePropertyChanged);
 
-    private readonly Dictionary<VisualElement, double> _viewSpeedDictionary = new Dictionary<VisualElement, double>();
+    private readonly Dictionary<VisualElement, ParallaxElementParam> _viewSpeedDictionary = new Dictionary<VisualElement, ParallaxElementParam>();
 
     private static void OnSourcePropertyChanged(BindableObject bindable, object oldValue, object newValue)
     {
@@ -61,23 +57,39 @@ public class ParallaxView : Layout, IDisposable
 
     private void CollectionViewOnScrolled(object sender, ItemsViewScrolledEventArgs e)
     {
-        ManageScrolled(e.VerticalOffset + e.VerticalDelta);
+        ManageScrolled(e.VerticalOffset + e.VerticalDelta, this);
     }
 
     private void ScrollViewOnScrolled(object sender, ScrolledEventArgs e)
     {
-        ManageScrolled(e.ScrollY);
+        ManageScrolled(e.ScrollY, this);
     }
 
-    private void ManageScrolled(double scrollY)
+    private void ManageScrolled(double scrollY, Layout view)
     {
-        foreach (var child in Children.Cast<VisualElement>())
-        {
-            var speed = _defaultSpeed;
-            if (_viewSpeedDictionary.TryGetValue(child, out var viewSpeed))
-                speed = viewSpeed;
+        double parentTranslationY = 0;
+        if (view.Parent is not ParallaxView)
+            parentTranslationY = view.TranslationY;
 
-            child.TranslationY = scrollY * speed;
+        foreach (var child in view.Children.Cast<VisualElement>())
+        {
+            if (!_viewSpeedDictionary.TryGetValue(child, out var param))
+                return;
+
+            // On stick, we need to add the difference between the scroll and the stick position
+            if (param.StickOnY > 0 && param.StickOnY <= scrollY)
+            {
+                child.TranslationY = parentTranslationY + param.Y + scrollY
+                                     - param.StickOnY * (1 - param.Speed);
+            }
+            else
+            {
+                child.TranslationY = parentTranslationY + param.Y + scrollY * param.Speed;
+            }
+
+            // Manage scroll for children
+            if (child is Layout layout && layout.Children.Any())
+                ManageScrolled(scrollY, layout);
         }
     }
 
@@ -85,41 +97,6 @@ public class ParallaxView : Layout, IDisposable
     {
         get => (View)GetValue(SourceProperty);
         set => SetValue(SourceProperty, value);
-    }
-
-    private static void OnSpeedPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-    {
-        if (bindable is View view)
-        {
-            if (view.Parent is ParallaxView parallaxView)
-            {
-                parallaxView._viewSpeedDictionary.Add(view, (double)newValue);
-            }
-            else
-            {
-                void OnViewParentChanged(object sender, EventArgs e)
-                {
-                    if (view.Parent is ParallaxView newParallaxView)
-                    {
-                        newParallaxView._viewSpeedDictionary.Add(view, (double)newValue);
-                        view.ParentChanged -= OnViewParentChanged;
-                    }
-                }
-
-                view.ParentChanged += OnViewParentChanged;
-            }
-        }
-    }
-
-
-    public static double GetSpeed(BindableObject view)
-    {
-        return (double)view.GetValue(SpeedProperty);
-    }
-
-    public static void SetSpeed(BindableObject view, double value)
-    {
-        view.SetValue(SpeedProperty, value);
     }
 
     public void Dispose()
