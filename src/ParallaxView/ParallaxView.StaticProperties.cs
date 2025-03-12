@@ -12,6 +12,14 @@ public partial class  ParallaxView
         BindableProperty.CreateAttached(nameof(ParallaxElementParam.StickOnY), typeof(double), typeof(ParallaxView), default(double),
             propertyChanged: StickOnYPropertyChanged);
 
+    public static readonly BindableProperty IsZoomedProperty =
+        BindableProperty.CreateAttached(nameof(ParallaxElementParam.IsZoomed), typeof(bool), typeof(ParallaxView), default(bool),
+            propertyChanged: OnIsZoomedPropertyChanged);
+
+    public static readonly BindableProperty ZoomScaleProperty =
+        BindableProperty.CreateAttached(nameof(ParallaxElementParam.ZoomScale), typeof(double), typeof(ParallaxView), 0.001d,
+            propertyChanged: OnZoomScalePropertyChanged);
+
     private static void OnSpeedPropertyChanged(BindableObject bindable, object oldValue, object newValue)
     {
         OnStaticPropertyChanged(bindable, oldValue, newValue, nameof(ParallaxElementParam.Speed));
@@ -21,6 +29,17 @@ public partial class  ParallaxView
     {
         OnStaticPropertyChanged(bindable, oldValue, newValue, nameof(ParallaxElementParam.StickOnY));
     }
+
+    private static void OnIsZoomedPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        OnStaticPropertyChanged(bindable, oldValue, newValue, nameof(ParallaxElementParam.IsZoomed));
+    }
+
+    private static void OnZoomScalePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        OnStaticPropertyChanged(bindable, oldValue, newValue, nameof(ParallaxElementParam.ZoomScale));
+    }
+
 
     private static void OnStaticPropertyChanged(BindableObject bindable, object oldValue, object newValue, string propertyName)
     {
@@ -58,6 +77,8 @@ public partial class  ParallaxView
 
                 SetParameterFromValue(p, GetSpeed((BindableObject)sender), nameof(ParallaxElementParam.Speed));
                 SetParameterFromValue(p, GetStickOnY((BindableObject)sender), nameof(ParallaxElementParam.StickOnY));
+                SetParameterFromValue(p, GetIsZoomed((BindableObject)sender), nameof(ParallaxElementParam.IsZoomed));
+                SetParameterFromValue(p, GetZoomScale((BindableObject)sender), nameof(ParallaxElementParam.ZoomScale));
             });
 
             // Manage scroll for children
@@ -83,6 +104,12 @@ public partial class  ParallaxView
             case nameof(ParallaxElementParam.StickOnY):
                 param.StickOnY = Convert.ToDouble(value);
                 break;
+            case nameof(ParallaxElementParam.IsZoomed):
+                param.IsZoomed = Convert.ToBoolean(value);
+                break;
+            case nameof(ParallaxElementParam.ZoomScale):
+                param.ZoomScale = Convert.ToDouble(value);
+                break;
         }
     }
 
@@ -104,5 +131,25 @@ public partial class  ParallaxView
     public static void SetStickOnY(BindableObject view, double value)
     {
         view.SetValue(StickOnYProperty, value);
+    }
+
+    public static bool GetIsZoomed(BindableObject view)
+    {
+        return (bool)view.GetValue(IsZoomedProperty);
+    }
+
+    public static void SetIsZoomed(BindableObject view, bool value)
+    {
+        view.SetValue(IsZoomedProperty, value);
+    }
+
+    public static double GetZoomScale(BindableObject view)
+    {
+        return (double)view.GetValue(ZoomScaleProperty);
+    }
+
+    public static void SetZoomScale(BindableObject view, double value)
+    {
+        view.SetValue(ZoomScaleProperty, value);
     }
 }

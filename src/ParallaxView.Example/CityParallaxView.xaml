@@ -15,6 +15,7 @@
           VerticalOptions="Start">
 
         <Image Margin="10,0,0,0"
+               parallaxView:ParallaxView.IsZoomed="True"
                parallaxView:ParallaxView.Speed="0.8"
                Aspect="AspectFit"
                HeightRequest="60"
@@ -25,6 +26,7 @@
                WidthRequest="60" />
 
         <Image Margin="90,10,0,0"
+               parallaxView:ParallaxView.IsZoomed="True"
                parallaxView:ParallaxView.Speed="0.6"
                Aspect="AspectFit"
                HeightRequest="60"
@@ -34,6 +36,7 @@
                WidthRequest="80" />
 
         <Image Margin="0,62,20,0"
+               parallaxView:ParallaxView.IsZoomed="True"
                parallaxView:ParallaxView.Speed="0.6"
                Aspect="AspectFit"
                HeightRequest="40"
@@ -43,6 +46,7 @@
                WidthRequest="60" />
 
         <Image Margin="30,70,0,0"
+               parallaxView:ParallaxView.IsZoomed="True"
                parallaxView:ParallaxView.Speed="0.6"
                Aspect="AspectFit"
                HeightRequest="30"
@@ -51,21 +55,24 @@
                VerticalOptions="Start"
                WidthRequest="40" />
 
-        <Image parallaxView:ParallaxView.Speed="0.4"
+        <Image parallaxView:ParallaxView.IsZoomed="True"
+               parallaxView:ParallaxView.Speed="0.4"
                Aspect="AspectFit"
                HeightRequest="250"
                HorizontalOptions="Fill"
                Source="shadow_parallax_depth2.png"
                VerticalOptions="End" />
 
-        <Image parallaxView:ParallaxView.Speed="0.2"
+        <Image parallaxView:ParallaxView.IsZoomed="True"
+               parallaxView:ParallaxView.Speed="0.2"
                Aspect="AspectFill"
                HeightRequest="250"
                HorizontalOptions="Fill"
                Source="shadow_parallax_depth1.png"
                VerticalOptions="End" />
 
-        <Image parallaxView:ParallaxView.Speed="0"
+        <Image parallaxView:ParallaxView.IsZoomed="True"
+               parallaxView:ParallaxView.Speed="0"
                Aspect="AspectFill"
                HeightRequest="100"
                HorizontalOptions="Fill"
