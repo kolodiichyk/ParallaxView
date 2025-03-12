@@ -87,13 +87,20 @@ public partial class ParallaxView : Layout, IDisposable
                 child.TranslationY = parentTranslationY + param.Y + scrollY * param.Speed;
             }
 
-            if (param.IsZoomed)
-                child.Scale = 1 + Math.Abs(param.ZoomScale * scrollY);
+            ManageZoom(child, param, scrollY);
 
             // Manage scroll for children
             if (child is Layout layout && layout.Children.Any())
                 ManageScrolled(scrollY, layout);
         }
+    }
+
+    private void ManageZoom(VisualElement view, ParallaxElementParam param, double scrollY)
+    {
+        if (!param.IsZoomed)
+            return;
+
+        view.Scale = 1 + Math.Abs(param.ZoomScale * scrollY);
     }
 
     public View Source
