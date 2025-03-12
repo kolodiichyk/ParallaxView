@@ -88,7 +88,7 @@ public partial class ParallaxView : Layout, IDisposable
             }
 
             if (param.IsZoomed)
-                child.Scale = 1 + param.ZoomScale * scrollY;
+                child.Scale = 1 + Math.Abs(param.ZoomScale * scrollY);
 
             // Manage scroll for children
             if (child is Layout layout && layout.Children.Any())
