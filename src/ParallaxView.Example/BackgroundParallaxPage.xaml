@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="ParallaxView.Example.BackgroundParallaxPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:parallaxView="clr-namespace:ParallaxView;assembly=ParallaxView"
+             BackgroundColor="{DynamicResource Primary}">
+    <Grid>
+        <parallaxView:ParallaxView HorizontalOptions="Fill"
+                                   IsClippedToBounds="True"
+                                   Source="{x:Reference CollectionViewExample}"
+                                   VerticalOptions="Fill">
+            <Image parallaxView:ParallaxView.Speed="0.1"
+                   Aspect="AspectFill"
+                   HeightRequest="1500"
+                   HorizontalOptions="Fill"
+                   Source="example4.jpg"
+                   VerticalOptions="Fill" />
+        </parallaxView:ParallaxView>
+        <CollectionView x:Name="CollectionViewExample">
+            <CollectionView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Buzz Aldrin</x:String>
+                    <x:String>William A. Anders</x:String>
+                    <x:String>Michael P. Anderson</x:String>
+                    <x:String>Neil Armstrong</x:String>
+                    <x:String>Alan Bean</x:String>
+                    <x:String>Guion S. Bluford, Jr.</x:String>
+                    <x:String>Charles Bolden</x:String>
+                    <x:String>Frank Borman</x:String>
+                    <x:String>Vance Brand</x:String>
+                    <x:String>David M. Brown</x:String>
+                    <x:String>Scott Carpenter</x:String>
+                    <x:String>Gerald Carr</x:String>
+                    <x:String>Eugene Andrew Cernan</x:String>
+                    <x:String>Roger B. Chaffee</x:String>
+                    <x:String>Franklin Chang-Díaz</x:String>
+                    <x:String>Kalpana Chawla</x:String>
+                    <x:String>Laurel Blair Salton Clark</x:String>
+                    <x:String>Eileen Collins</x:String>
+                    <x:String>Michael Collins</x:String>
+                    <x:String>Charles Conrad, Jr.</x:String>
+                    <x:String>L. Gordon Cooper, Jr.</x:String>
+                    <x:String>Robert Laurel Crippen</x:String>
+                    <x:String>R. Walter Cunningham</x:String>
+                    <x:String>Donn Eisele</x:String>
+                    <x:String>Owen K. Garriott</x:String>
+                    <x:String>Edward Gibson</x:String>
+                    <x:String>John H. Glenn, Jr.</x:String>
+                    <x:String>Richard F. Gordon, Jr.</x:String>
+                    <x:String>Virgil I. Grissom</x:String>
+                    <x:String>Fred W. Haise, Jr.</x:String>
+                    <x:String>Susan Helms</x:String>
+                    <x:String>Rick D. Husband</x:String>
+                    <x:String>James B. Irwin</x:String>
+                    <x:String>Mae Jemison</x:String>
+                    <x:String>Mark Kelly</x:String>
+                    <x:String>Scott Kelly</x:String>
+                    <x:String>Joseph Kerwin</x:String>
+                    <x:String>James A. Lovell, Jr.</x:String>
+                    <x:String>Shannon Wells Lucid</x:String>
+                    <x:String>Christa Corrigan McAuliffe</x:String>
+                    <x:String>Bruce McCandless</x:String>
+                    <x:String>William C. McCool</x:String>
+                    <x:String>James A. McDivitt</x:String>
+                    <x:String>Ronald McNair</x:String>
+                    <x:String>Michael Melvill</x:String>
+                    <x:String>Edgar D. Mitchell</x:String>
+                    <x:String>Barbara Morgan</x:String>
+                    <x:String>Story Musgrave</x:String>
+                    <x:String>Bill Nelson</x:String>
+                    <x:String>Ellen Ochoa</x:String>
+                    <x:String>Sally Ride</x:String>
+                    <x:String>Stuart A. Roosa</x:String>
+                    <x:String>Jerry Ross</x:String>
+                    <x:String>Walter M. Schirra, Jr.</x:String>
+                    <x:String>Harrison Schmitt</x:String>
+                    <x:String>David Scott</x:String>
+                    <x:String>Alan B. Shepard, Jr.</x:String>
+                    <x:String>Donald Kent Slayton</x:String>
+                    <x:String>Thomas P. Stafford</x:String>
+                    <x:String>Kathryn Sullivan</x:String>
+                    <x:String>John L. Swigert, Jr.</x:String>
+                    <x:String>David Mathieson Walker</x:String>
+                    <x:String>Edward H. White, II</x:String>
+                    <x:String>Peggy Whitson</x:String>
+                    <x:String>Sunita Williams</x:String>
+                    <x:String>Alfred Worden</x:String>
+                    <x:String>John W. Young</x:String>
+                </x:Array>
+            </CollectionView.ItemsSource>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid HeightRequest="50">
+                        <Label FontFamily="FuturaPTBold"
+                               FontSize="30"
+                               HorizontalOptions="Center"
+                               Text="{Binding .}"
+                               TextColor="{DynamicResource Tertiary}"
+                               VerticalOptions="Center" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

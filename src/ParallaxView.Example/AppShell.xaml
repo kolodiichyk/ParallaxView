@@ -61,15 +61,19 @@
         </DataTemplate>
     </Shell.ItemTemplate>
 
-    <ShellContent Title="Example 1 - parallax "
+    <ShellContent Title="Example 1 - Parallax "
                   ContentTemplate="{DataTemplate example:FireWatchPage}"
                   Route="{x:Static example:FireWatchPage.Route}" />
 
-    <ShellContent Title="Example 2 - zoom"
+    <ShellContent Title="Example 2 - Zoom"
                   ContentTemplate="{DataTemplate example:PhotoZoom}"
                   Route="{x:Static example:PhotoZoom.Route}" />
 
     <ShellContent Title="Example 3 - CollectionView"
                   ContentTemplate="{DataTemplate example:FireWatchPage2}"
                   Route="{x:Static example:FireWatchPage2.Route}" />
+
+    <ShellContent Title="Example 4 - Parallax background"
+                  ContentTemplate="{DataTemplate example:BackgroundParallaxPage}"
+                  Route="{x:Static example:BackgroundParallaxPage.Route}" />
 </Shell>
