@@ -3,6 +3,8 @@
 .net MAUI control for creating parallax effects to parent controls with scroll (ScrollView and CollectionView)
 ## FireWatch Parallax Example
 
+![Demo Screen](https://github.com/kolodiichyk/ParallaxView/blob/main/screenshots/demo.gif)
+
 The FireWatch parallax implementation creates a beautiful depth effect using multiple image layers with different parallax speeds. Here's how to implement it:
 
 ```xaml
