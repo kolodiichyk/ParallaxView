@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage x:Class="ParallaxView.Example.PhotoZoom"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:parallaxView="clr-namespace:ParallaxView;assembly=ParallaxView"
+             x:Name="This"
+             BackgroundColor="#000">
+
+    <Shell.TitleView>
+        <Label FontFamily="SchnyderS"
+               FontSize="24"
+               HorizontalOptions="Start"
+               Text="ParallaxView with Zoom"
+               TextColor="{DynamicResource Tertiary}"
+               VerticalOptions="Center" />
+    </Shell.TitleView>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" VerticalOptions="Start">
+
+            <parallaxView:ParallaxView HeightRequest="250" IsClippedToBounds="True">
+                <Image parallaxView:ParallaxView.IsZoomed="True"
+                       parallaxView:ParallaxView.Speed="0.9"
+                       parallaxView:ParallaxView.ZoomScale="0.0075"
+                       Aspect="AspectFill"
+                       HeightRequest="250"
+                       HorizontalOptions="Fill"
+                       Source="photo.jpg"
+                       VerticalOptions="End" />
+            </parallaxView:ParallaxView>
+
+            <VerticalStackLayout Padding="20,0,20,20"
+                                 Spacing="20"
+                                 ZIndex="1">
+                <Label FontAttributes="Bold"
+                       FontFamily="SchnyderS"
+                       FontSize="30"
+                       HorizontalOptions="Center"
+                       Text="Make Peace A Global Priority: A Strategic Blueprint For Universal Prosperity"
+                       TextColor="{DynamicResource Tertiary}"
+                       VerticalOptions="Start" />
+
+                <Label Padding="20"
+                       BackgroundColor="{DynamicResource Secondary}"
+                       FontAttributes="Italic"
+                       FontFamily="SchnyderSItalic"
+                       FontSize="18"
+                       HorizontalOptions="Center"
+                       TextColor="{DynamicResource Tertiary}"
+                       VerticalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold"
+                                  FontFamily="SchnyderS"
+                                  Text="Dr. Adil Dalal, DBA - CEO " />
+                            <Span FontFamily="SchnyderSItalic" Text=", keynote speaker, leadership and AI pioneer. Author of 4 books and 10 global awards, inspiring leaders worldwide." />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label FontFamily="SchnyderS"
+                       FontSize="18"
+                       HorizontalOptions="Fill"
+                       Opacity="0.75"
+                       Text="Over 250 conflicts in the past century have claimed millions of lives, devastated economies and crippled infrastructure. War diverts resources from healthcare, education and innovation while severely harming the environment. Ending this cycle of destruction is not just a moral imperative—it's an economic necessity.  A peaceful world fosters stability, unlocks human potential and drives sustainable growth. As one of the founding members of the Peace Train Global Movement, led by Maryn Ryan Soref, we work to make peace more profitable than war, aiming for world peace by 2030. At Davos Worldwide, his eminence Shyalpa Rinpoche and other global leaders outlined the Four Pillars for Lasting Peace:"
+                       TextColor="{DynamicResource Tertiary}"
+                       VerticalOptions="Start" />
+
+                <Label Padding="20,0"
+                       FontAttributes="Italic"
+                       FontSize="18"
+                       HorizontalOptions="Start"
+                       TextColor="{DynamicResource Tertiary}"
+                       VerticalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold"
+                                  FontFamily="SchnyderS"
+                                  Text="1. Inner Stability: " />
+                            <Span FontFamily="SchnyderS" Text="The foundation for resilience and ethical leadership" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Padding="20,0"
+                       FontAttributes="Italic"
+                       FontSize="18"
+                       HorizontalOptions="Start"
+                       TextColor="{DynamicResource Tertiary}"
+                       VerticalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold"
+                                  FontFamily="SchnyderS"
+                                  Text="2. Tangible Prosperity: " />
+                            <Span FontFamily="SchnyderS" Text="Economic structures that reward peace-driven growth" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Padding="20,0"
+                       FontAttributes="Italic"
+                       FontSize="18"
+                       HorizontalOptions="Start"
+                       TextColor="{DynamicResource Tertiary}"
+                       VerticalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold"
+                                  FontFamily="SchnyderS"
+                                  Text="3. Living With Purpose: " />
+                            <Span FontFamily="SchnyderS" Text="Empowering individuals to contribute meaningfully" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Padding="20,0"
+                       FontAttributes="Italic"
+                       FontSize="18"
+                       HorizontalOptions="Start"
+                       TextColor="{DynamicResource Tertiary}"
+                       VerticalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold"
+                                  FontFamily="SchnyderS"
+                                  Text="4. Sustainable Connectivity: " />
+                            <Span FontFamily="SchnyderS" Text="Using technology and business to unify societies" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label FontFamily="SchnyderS"
+                       FontSize="18"
+                       HorizontalOptions="Fill"
+                       Opacity="0.75"
+                       Text="By aligning business strategies with these pillars, we can create a world where peace fuels prosperity, rather than being seen as an abstract ideal."
+                       TextColor="{DynamicResource Tertiary}"
+                       VerticalOptions="Start" />
+
+                <Label Margin="0,20,0,0"
+                       FontAttributes="Bold"
+                       FontFamily="SchnyderS"
+                       FontSize="20"
+                       HorizontalOptions="Start"
+                       Text="Redefining Peace In The Modern Economy"
+                       TextColor="{DynamicResource Tertiary}"
+                       VerticalOptions="Start" />
+
+                <Label FontFamily="SchnyderS"
+                       FontSize="18"
+                       HorizontalOptions="Fill"
+                       Opacity="0.75"
+                       Text="Peace is no longer just the absence of war—it is a strategic advantage that fosters economic strength, technological advancement and sustainable progress. Innovation, conscious leadership and a commitment to justice and equity build modern peace.  To achieve lasting global stability, we must rethink how we design, reward and sustain peace through business, governance and technology."
+                       TextColor="{DynamicResource Tertiary}"
+                       VerticalOptions="Start" />
+
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

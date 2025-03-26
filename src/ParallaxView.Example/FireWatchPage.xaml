@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage x:Class="ParallaxView.Example.FireWatchPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:parallaxViews="clr-namespace:ParallaxView.Example.ParallaxViews">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,0"
+                             Spacing="10"
+                             VerticalOptions="Start">
+
+            <parallaxViews:FireWatchParallaxView Margin="-20,0" VerticalOptions="Fill" />
+
+            <Label Margin="0,0,0,10"
+                   FontAttributes="Bold"
+                   FontSize="28"
+                   HorizontalOptions="Start"
+                   SemanticProperties.HeadingLevel="Level1"
+                   Text="Firewatch"
+                   TextColor="{x:StaticResource Tertiary}" />
+
+            <Label FontAutoScalingEnabled="True"
+                   FontSize="16"
+                   HorizontalOptions="Start"
+                   HorizontalTextAlignment="Justify"
+                   Text="Firewatch is an adventure game developed by Campo Santo and published by the developer in partnership with Panic. The game was released in February 2016 for Linux, OS X, PlayStation 4, Windows, and Xbox One in September 2016, and for Nintendo Switch in December 2018. The story follows a fire lookout named Henry who works in Shoshone National Forest. Henry interacts with his supervisor Delilah using a walkie-talkie, with the player choosing from dialog options to communicate. His exchanges with Delilah inform the process by which their relationship is developed. Over the course of the summer, Henry and Delilah appear to be menaced by unseen forces and have to unravel a years-old mystery."
+                   TextColor="{x:StaticResource Tertiary}" />
+
+            <Label FontAutoScalingEnabled="True"
+                   FontSize="16"
+                   HorizontalOptions="Start"
+                   HorizontalTextAlignment="Justify"
+                   Text="The game was directed by Olly Moss and Sean Vanaman, written by Chris Remo, Jake Rodkin, Moss and Vanaman, and produced by Gabe McGill and artist Jane Ng. The game's environment was modelled by Ng, based on a single painting by Moss. The design draws inspiration from New Deal advertisements by the National Park Service and field research conducted in Yosemite National Park."
+                   TextColor="{x:StaticResource Tertiary}" />
+
+            <Label Margin="0,0,0,0"
+                   FontAutoScalingEnabled="True"
+                   FontSize="16"
+                   HorizontalOptions="Start"
+                   HorizontalTextAlignment="Justify"
+                   Text="The game received generally positive reviews, earning praise for its story, characters, dialogue, and visual style, yet the presence of technical issues and the game's ending were both subjects of criticism. Firewatch won the award for Best 3D Visual Experience at the Unity Awards 2016, Best Indie Game at the 2016 Golden Joystick Awards, Best Narrative at the 2017 Game Developers Choice Awards and Debut Game at the 2017 British Academy Games Awards. By late 2016, the game had sold over a million copies."
+                   TextColor="{x:StaticResource Tertiary}" />
+
+            <Label Margin="0,15"
+                   FontAttributes="Bold"
+                   FontSize="28"
+                   HorizontalOptions="Start"
+                   SemanticProperties.HeadingLevel="Level1"
+                   Text="Gameplay"
+                   TextColor="{x:StaticResource Tertiary}" />
+
+            <Label Margin="0,0,0,0"
+                   FontAutoScalingEnabled="True"
+                   FontSize="16"
+                   HorizontalOptions="Start"
+                   HorizontalTextAlignment="Justify"
+                   Text="Firewatch is an adventure game played from a first-person view that takes place in the American state of Wyoming in 1989.[1][2] The player takes on the role of Henry, a fire lookout who is assigned to his own tower in Shoshone National Forest.[3] Through exploration of the surrounding area, Henry uncovers clues about mysterious occurrences in the vicinity that are related to the ransacking of his tower while he is out on a routine patrol and a shadowy figure that occasionally appears watching him from afar.[4] Henry's only means of communication is a walkie-talkie connecting him to his supervisor, Delilah.[5] The player may choose from a number of dialog options to speak with her upon the discovery of new interactive objects or environments, or can refrain from communicating. The player's choices will influence the tone of Henry's relationship with Delilah. As the story progresses, new areas will be opened up for the player, and certain events are set at different times of the day.[6] Objects found in the wilderness can be kept in the inventory for later use."
+                   TextColor="{x:StaticResource Tertiary}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

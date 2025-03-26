@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<parallaxView:ParallaxView x:Class="ParallaxView.Example.ParallaxViews.FireWatchParallaxView"
+                           xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                           xmlns:parallaxView="clr-namespace:ParallaxView;assembly=ParallaxView"
+                           BackgroundColor="#F8DDCB"
+                           HeightRequest="300"
+                           IsClippedToBounds="True">
+    <Image parallaxView:ParallaxView.Speed="0.8"
+           Aspect="AspectFill"
+           HeightRequest="300"
+           HorizontalOptions="Fill"
+           Source="layer_1.png"
+           VerticalOptions="End" />
+
+    <Image parallaxView:ParallaxView.Speed="0.7"
+           Aspect="AspectFill"
+           HeightRequest="300"
+           HorizontalOptions="Fill"
+           Source="layer_2.png"
+           VerticalOptions="End" />
+
+    <Image parallaxView:ParallaxView.Speed="0.6"
+           Aspect="AspectFill"
+           HeightRequest="300"
+           HorizontalOptions="Fill"
+           Source="layer_3.png"
+           VerticalOptions="End" />
+
+    <Image parallaxView:ParallaxView.Speed="0.5"
+           Aspect="AspectFill"
+           HeightRequest="300"
+           HorizontalOptions="Fill"
+           Source="layer_4.png"
+           VerticalOptions="End" />
+
+    <Image parallaxView:ParallaxView.Speed="0.4"
+           Aspect="AspectFill"
+           HeightRequest="300"
+           HorizontalOptions="Fill"
+           Source="layer_5.png"
+           VerticalOptions="End" />
+
+    <Image parallaxView:ParallaxView.Speed="0.3"
+           Aspect="AspectFill"
+           HeightRequest="250"
+           HorizontalOptions="Center"
+           Source="firewatch.png"
+           VerticalOptions="Center" />
+
+    <Image parallaxView:ParallaxView.Speed="0"
+           Aspect="AspectFill"
+           HeightRequest="300"
+           HorizontalOptions="Fill"
+           Source="layer_6.png"
+           VerticalOptions="End" />
+
+</parallaxView:ParallaxView>

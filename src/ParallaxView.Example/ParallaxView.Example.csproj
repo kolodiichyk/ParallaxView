@@ -68,4 +68,17 @@
       <ProjectReference Include="..\ParallaxView\ParallaxView.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <MauiXaml Update="Resources\Styles\FireWatchTheme2.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\Styles\FireWatchTheme2.xaml.cs">
+        <DependentUpon>FireWatchTheme2.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+
 </Project>

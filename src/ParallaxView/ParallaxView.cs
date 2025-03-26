@@ -1,3 +1,5 @@
+using System.Collections.Concurrent;
+using System.Diagnostics;
 using Microsoft.Maui.Layouts;
 using ParallaxView.Extensions;
 
@@ -7,7 +9,6 @@ namespace ParallaxView;
 public partial class ParallaxView : Layout, IDisposable
 {
     protected override ILayoutManager CreateLayoutManager() => new ParallaxViewLayoutManager(this);
-
 
     public static BindableProperty SourceProperty = BindableProperty.Create(nameof(Source),
         typeof(View), typeof(ParallaxView), propertyChanged: OnSourcePropertyChanged);
@@ -21,6 +22,39 @@ public partial class ParallaxView : Layout, IDisposable
             parallaxView.UnSubscribeToSource(oldValue);
             parallaxView.SubscribeToSource(newValue);
         }
+    }
+
+    protected override void OnParentChanged()
+    {
+        base.OnParentChanged();
+
+        if (Parent is null)
+            return;
+
+        if (Parent is ScrollView or CollectionView)
+        {
+            UnSubscribeToSource(Source);
+            SubscribeToSource(Parent);
+        }
+        else
+        {
+            var source = Parent.FindParent<ScrollView, CollectionView>();
+            if (source is not null)
+            {
+                UnSubscribeToSource(Source);
+                SubscribeToSource(source);
+            }
+            else
+            {
+                Parent.ParentChanged += OnParentParentChanged;
+            }
+        }
+    }
+
+    private void OnParentParentChanged(object sender, EventArgs e)
+    {
+        Parent.ParentChanged -= OnParentParentChanged;
+        OnParentChanged();
     }
 
     private void SubscribeToSource(object source)
@@ -57,7 +91,7 @@ public partial class ParallaxView : Layout, IDisposable
 
     private void CollectionViewOnScrolled(object sender, ItemsViewScrolledEventArgs e)
     {
-        ManageScrolled(e.VerticalOffset + e.VerticalDelta, this);
+        ManageScrolled(e.VerticalOffset /*+ e.VerticalDelta*/, this);
     }
 
     private void ScrollViewOnScrolled(object sender, ScrolledEventArgs e)
@@ -73,6 +107,7 @@ public partial class ParallaxView : Layout, IDisposable
 
         foreach (var child in view.Children.Cast<VisualElement>())
         {
+            child.BatchBegin();
             if (!_viewSpeedDictionary.TryGetValue(child, out var param))
                 return;
 
@@ -92,6 +127,8 @@ public partial class ParallaxView : Layout, IDisposable
             // Manage scroll for children
             if (child is Layout layout && layout.Children.Any())
                 ManageScrolled(scrollY, layout);
+
+            child.BatchCommit();
         }
     }
 

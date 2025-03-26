@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<parallaxView:ParallaxView x:Class="ParallaxView.Example.ParallaxViews.FireWatchParallaxView2"
+                           xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                           xmlns:parallaxView="clr-namespace:ParallaxView;assembly=ParallaxView"
+                           BackgroundColor="#F8DDCB"
+                           HeightRequest="300"
+                           IsClippedToBounds="True">
+    <Image parallaxView:ParallaxView.Speed="0.8"
+           Aspect="AspectFill"
+           HeightRequest="300"
+           HorizontalOptions="Fill"
+           Source="example3_1.png"
+           VerticalOptions="End" />
+
+    <Image parallaxView:ParallaxView.Speed="0.7"
+           Aspect="AspectFill"
+           HeightRequest="300"
+           HorizontalOptions="Fill"
+           Source="example3_2.png"
+           VerticalOptions="End" />
+
+    <!-- <Image parallaxView:ParallaxView.Speed="0.6"
+           Aspect="AspectFill"
+           HeightRequest="300"
+           HorizontalOptions="Fill"
+           Source="example3_3.png"
+           VerticalOptions="End" />
+
+    <Image parallaxView:ParallaxView.Speed="0.5"
+           Aspect="AspectFill"
+           HeightRequest="300"
+           HorizontalOptions="Fill"
+           Source="example3_4.png"
+           VerticalOptions="End" />
+
+    <Image parallaxView:ParallaxView.Speed="0.4"
+           Aspect="AspectFill"
+           HeightRequest="300"
+           HorizontalOptions="Fill"
+           Source="example3_5.png"
+           VerticalOptions="End" />
+
+    <Image parallaxView:ParallaxView.Speed="0.3"
+           Aspect="AspectFill"
+           HeightRequest="300"
+           HorizontalOptions="Center"
+           Source="example3_6.png"
+           VerticalOptions="Center" />-->
+
+    <Image parallaxView:ParallaxView.Speed="0.2"
+           Aspect="AspectFill"
+           HeightRequest="300"
+           HorizontalOptions="Fill"
+           Source="example3_7.png"
+           VerticalOptions="End" />
+
+    <Image parallaxView:ParallaxView.Speed="0.1"
+           Aspect="AspectFill"
+           HeightRequest="300"
+           HorizontalOptions="Fill"
+           Source="example3_8.png"
+           VerticalOptions="End" />
+
+    <Image parallaxView:ParallaxView.Speed="0"
+           Aspect="AspectFill"
+           HeightRequest="300"
+           HorizontalOptions="Fill"
+           Source="example3_9.png"
+           VerticalOptions="End" />
+
+</parallaxView:ParallaxView>
