@@ -1,16 +1,17 @@
 # ParallaxView [![NuGet](https://img.shields.io/nuget/v/ParallaxView.svg?label=NuGet)](https://www.nuget.org/packages/ParallaxView/)
 
-.net MAUI control for creating parallax effects to parent controls with scroll (ScrollView and CollectionView)
-## FireWatch Parallax Example
+.net MAUI control for creating parallax effects and zoom to parent controls with scroll (ScrollView and CollectionView)
+## Example
 
-![Demo Screen](https://github.com/kolodiichyk/ParallaxView/blob/main/screenshots/demo.gif)
+![Demo Screen](https://github.com/kolodiichyk/ParallaxView/blob/main/screenshots/demo.gif?v2)
+
 
 The FireWatch parallax implementation creates a beautiful depth effect using multiple image layers with different parallax speeds. Here's how to implement it:
 
 ```xaml
 <parallaxView:ParallaxView 
     xmlns:parallaxView="clr-namespace:ParallaxView;assembly=ParallaxView"
-    Source="{Binding Source={x:Reference ParentScrollView}}"
+    Source="{x:Reference ParentScrollView}"
     BackgroundColor="#F8DDCB"
     HeightRequest="300"
     IsClippedToBounds="True">
