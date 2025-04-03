@@ -29,7 +29,7 @@
             <parallaxViews:FireWatchParallaxView2 Margin="0,0" VerticalOptions="Fill" />
         </CollectionView.Header>
         <CollectionView.ItemTemplate>
-            <DataTemplate>
+            <DataTemplate x:DataType="x:String">
                 <Grid HeightRequest="100" ZIndex="1">
                     <Label FontFamily="FuturaPTBold"
                            FontSize="30"

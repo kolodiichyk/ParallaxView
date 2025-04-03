@@ -1,19 +1,19 @@
 #if __ANDROID__
 using Android.OS;
-#endif
 using Microsoft.Maui.Platform;
+#endif
 using ParallaxView.Example.Resources.Styles;
 
 
 namespace ParallaxView.Example.Helpers;
 
-internal static class ThemesManager
+static class ThemesManager
 {
-    private static Dictionary<Themes, ResourceDictionary> _themes;
+	static readonly Dictionary<Themes, ResourceDictionary> themes;
 
     static ThemesManager()
     {
-        _themes = new Dictionary<Themes, ResourceDictionary>
+        themes = new Dictionary<Themes, ResourceDictionary>
         {
             {Themes.FireWatch, new FireWatchTheme()},
             {Themes.PhotoZoom, new PhotoZoomTheme()},
@@ -24,16 +24,18 @@ internal static class ThemesManager
     public static void SetTheme(Themes theme)
     {
         if (Application.Current == null)
-            return;
+		{
+			return;
+		}
 
-        Application.Current.Resources.MergedDictionaries.Clear();
-        Application.Current.Resources.MergedDictionaries.Add(_themes[theme]);
+		Application.Current.Resources.MergedDictionaries.Clear();
+        Application.Current.Resources.MergedDictionaries.Add(themes[theme]);
 
         FixFlyoutBackgroundColor();
         FixStatusBarColor();
     }
 
-    private static void FixFlyoutBackgroundColor()
+    static void FixFlyoutBackgroundColor()
     {
         if (Application.Current != null &&
             Application.Current.Resources.TryGetValue("Primary", out var primaryColor))
@@ -42,22 +44,24 @@ internal static class ThemesManager
         }
     }
 
-    public static void FixStatusBarColor()
+    static void FixStatusBarColor()
     {
 #if __ANDROID__
+        var window = Platform.CurrentActivity?.Window;
         if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
         {
             if (Application.Current != null &&
-                Application.Current.Resources.TryGetValue("Secondary", out var secondaryColor))
+                Application.Current.Resources.TryGetValue("Secondary", out var secondaryColor) &&
+                window != null)
             {
-                Platform.CurrentActivity.Window.SetStatusBarColor(((Color)secondaryColor).ToPlatform());
+                window.SetStatusBarColor(((Color)secondaryColor).ToPlatform());
             }
         }
 #endif
     }
 }
 
-internal enum Themes
+enum Themes
 {
     FireWatch,
     PhotoZoom,

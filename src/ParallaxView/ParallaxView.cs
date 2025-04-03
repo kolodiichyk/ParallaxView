@@ -1,5 +1,3 @@
-using System.Collections.Concurrent;
-using System.Diagnostics;
 using Microsoft.Maui.Layouts;
 using ParallaxView.Extensions;
 
@@ -8,146 +6,179 @@ namespace ParallaxView;
 [ContentProperty(nameof(Children))]
 public partial class ParallaxView : Layout, IDisposable
 {
-    protected override ILayoutManager CreateLayoutManager() => new ParallaxViewLayoutManager(this);
+	bool isDisposed;
 
-    public static BindableProperty SourceProperty = BindableProperty.Create(nameof(Source),
-        typeof(View), typeof(ParallaxView), propertyChanged: OnSourcePropertyChanged);
+	public static BindableProperty SourceProperty = BindableProperty.Create(nameof(Source),
+		typeof(View), typeof(ParallaxView), propertyChanged: OnSourcePropertyChanged);
 
-    private readonly Dictionary<VisualElement, ParallaxElementParam> _viewSpeedDictionary = new Dictionary<VisualElement, ParallaxElementParam>();
+	readonly Dictionary<VisualElement, ParallaxElementParam> _viewSpeedDictionary = new();
 
-    private static void OnSourcePropertyChanged(BindableObject bindable, object oldValue, object newValue)
-    {
-        if (bindable is ParallaxView parallaxView)
-        {
-            parallaxView.UnSubscribeToSource(oldValue);
-            parallaxView.SubscribeToSource(newValue);
-        }
-    }
+	public View Source
+	{
+		get => (View)GetValue(SourceProperty);
+		set => SetValue(SourceProperty, value);
+	}
 
-    protected override void OnParentChanged()
-    {
-        base.OnParentChanged();
+	public void Dispose()
+	{
+		Dispose(true);
+	}
 
-        if (Parent is null)
-            return;
+	protected virtual void Dispose(bool isDisposing)
+	{
+		if (isDisposed)
+		{
+			return;
+		}
 
-        if (Parent is ScrollView or CollectionView)
-        {
-            UnSubscribeToSource(Source);
-            SubscribeToSource(Parent);
-        }
-        else
-        {
-            var source = Parent.FindParent<ScrollView, CollectionView>();
-            if (source is not null)
-            {
-                UnSubscribeToSource(Source);
-                SubscribeToSource(source);
-            }
-            else
-            {
-                Parent.ParentChanged += OnParentParentChanged;
-            }
-        }
-    }
+		if (isDisposing)
+		{
+			UnSubscribeToSource(Source);
+		}
 
-    private void OnParentParentChanged(object sender, EventArgs e)
-    {
-        Parent.ParentChanged -= OnParentParentChanged;
-        OnParentChanged();
-    }
+		isDisposed = true;
+	}
 
-    private void SubscribeToSource(object source)
-    {
-        ManageScrollEventSubscription(source, true);
-    }
+	protected override ILayoutManager CreateLayoutManager()
+	{
+		return new ParallaxViewLayoutManager(this);
+	}
 
-    private void UnSubscribeToSource(object source)
-    {
-        ManageScrollEventSubscription(source, false);
-    }
+	static void OnSourcePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+	{
+		if (bindable is ParallaxView parallaxView)
+		{
+			parallaxView.UnSubscribeToSource(oldValue);
+			parallaxView.SubscribeToSource(newValue);
+		}
+	}
 
-    private void ManageScrollEventSubscription(object source, bool subscribe)
-    {
-        if (source == null)
-            return;
+	protected override void OnParentChanged()
+	{
+		base.OnParentChanged();
 
-        switch (source)
-        {
-            case ScrollView scrollView:
-                if (subscribe)
-                    scrollView.Scrolled += ScrollViewOnScrolled;
-                else
-                    scrollView.Scrolled -= ScrollViewOnScrolled;
-                break;
-            case CollectionView collectionView:
-                if (subscribe)
-                    collectionView.Scrolled += CollectionViewOnScrolled;
-                else
-                    collectionView.Scrolled -= CollectionViewOnScrolled;
-                break;
-        }
-    }
+		if (Parent is null)
+		{
+			return;
+		}
 
-    private void CollectionViewOnScrolled(object sender, ItemsViewScrolledEventArgs e)
-    {
-        ManageScrolled(e.VerticalOffset /*+ e.VerticalDelta*/, this);
-    }
+		if (Parent is ScrollView or CollectionView)
+		{
+			UnSubscribeToSource(Source);
+			SubscribeToSource(Parent);
+		}
+		else
+		{
+			var source = Parent.FindParent<ScrollView, CollectionView>();
+			if (source is not null)
+			{
+				UnSubscribeToSource(Source);
+				SubscribeToSource(source);
+			}
+			else
+			{
+				Parent.ParentChanged += OnParentParentChanged;
+			}
+		}
+	}
 
-    private void ScrollViewOnScrolled(object sender, ScrolledEventArgs e)
-    {
-        ManageScrolled(e.ScrollY, this);
-    }
+	void OnParentParentChanged(object sender, EventArgs e)
+	{
+		Parent.ParentChanged -= OnParentParentChanged;
+		OnParentChanged();
+	}
 
-    private void ManageScrolled(double scrollY, Layout view)
-    {
-        double parentTranslationY = 0;
-        if (view.Parent is not ParallaxView)
-            parentTranslationY = view.TranslationY;
+	void SubscribeToSource(object source)
+	{
+		ManageScrollEventSubscription(source, true);
+	}
 
-        foreach (var child in view.Children.Cast<VisualElement>())
-        {
-            child.BatchBegin();
-            if (!_viewSpeedDictionary.TryGetValue(child, out var param))
-                return;
+	void UnSubscribeToSource(object source)
+	{
+		ManageScrollEventSubscription(source, false);
+	}
 
-            // On stick, we need to add the difference between the scroll and the stick position
-            if (param.StickOnY > 0 && param.StickOnY <= scrollY)
-            {
-                child.TranslationY = parentTranslationY + param.Y + scrollY
-                                     - param.StickOnY * (1 - param.Speed);
-            }
-            else
-            {
-                child.TranslationY = parentTranslationY + param.Y + scrollY * param.Speed;
-            }
+	void ManageScrollEventSubscription(object source, bool subscribe)
+	{
+		if (source == null)
+		{
+			return;
+		}
 
-            ManageZoom(child, param, scrollY);
+		switch (source)
+		{
+			case ScrollView scrollView:
+				if (subscribe)
+				{
+					scrollView.Scrolled += ScrollViewOnScrolled;
+				}
+				else
+				{
+					scrollView.Scrolled -= ScrollViewOnScrolled;
+				}
 
-            // Manage scroll for children
-            if (child is Layout layout && layout.Children.Any())
-                ManageScrolled(scrollY, layout);
+				break;
+			case CollectionView collectionView:
+				if (subscribe)
+				{
+					collectionView.Scrolled += CollectionViewOnScrolled;
+				}
+				else
+				{
+					collectionView.Scrolled -= CollectionViewOnScrolled;
+				}
 
-            child.BatchCommit();
-        }
-    }
+				break;
+		}
+	}
 
-    private void ManageZoom(VisualElement view, ParallaxElementParam param, double scrollY)
-    {
-        if (!param.IsZoomed)
-            return;
+	void CollectionViewOnScrolled(object sender, ItemsViewScrolledEventArgs e)
+	{
+		ManageScrolled(e.VerticalOffset /*+ e.VerticalDelta*/, this);
+	}
 
-        view.Scale = 1 + Math.Abs(param.ZoomScale * scrollY);
-    }
+	void ScrollViewOnScrolled(object sender, ScrolledEventArgs e)
+	{
+		ManageScrolled(e.ScrollY, this);
+	}
 
-    public View Source
-    {
-        get => (View)GetValue(SourceProperty);
-        set => SetValue(SourceProperty, value);
-    }
+	void ManageScrolled(double scrollY, Layout view)
+	{
+		double parentTranslationY = 0;
+		if (view.Parent is not ParallaxView)
+		{
+			parentTranslationY = view.TranslationY;
+		}
 
-    public void Dispose()
-    {
-        UnSubscribeToSource(Source);
-    }
+		foreach (var child in view.Children.Cast<VisualElement>())
+		{
+			child.BatchBegin();
+			if (!_viewSpeedDictionary.TryGetValue(child, out var param))
+			{
+				return;
+			}
+
+			child.TranslationY = parentTranslationY + param.Y + scrollY * param.Speed;
+
+			ManageZoom(child, param, scrollY);
+
+			// Manage scroll for children
+			if (child is Layout layout && layout.Children.Any())
+			{
+				ManageScrolled(scrollY, layout);
+			}
+
+			child.BatchCommit();
+		}
+	}
+
+	void ManageZoom(VisualElement view, ParallaxElementParam param, double scrollY)
+	{
+		if (!param.IsZoomed)
+		{
+			return;
+		}
+
+		view.Scale = 1 + Math.Abs(param.ZoomScale * scrollY);
+	}
 }

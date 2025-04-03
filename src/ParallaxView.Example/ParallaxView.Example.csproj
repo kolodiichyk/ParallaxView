@@ -19,6 +19,9 @@
         <SingleProject>true</SingleProject>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+      
+        <MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
+        <IsAotCompatible>true</IsAotCompatible>
 
         <!-- Display name -->
         <ApplicationTitle>ParallaxView.Example</ApplicationTitle>
@@ -66,26 +69,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ParallaxView\ParallaxView.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <MauiXaml Update="Resources\Styles\FireWatchTheme2.xaml">
-        <SubType>Designer</SubType>
-      </MauiXaml>
-      <MauiXaml Update="BackgroundParallaxPage.xaml">
-        <SubType>Designer</SubType>
-      </MauiXaml>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Update="Resources\Styles\FireWatchTheme2.xaml.cs">
-        <DependentUpon>FireWatchTheme2.xaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="BackgroundParallaxPage.xaml.cs">
-        <DependentUpon>BackgroundParallaxPage.xaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
     </ItemGroup>
 
 </Project>

@@ -14,7 +14,7 @@ public class ParallaxViewLayoutManager(IList<IView> view) : ILayoutManager
         return ProcessChildren(view, child => child.Arrange(bounds));
     }
 
-    private Size ProcessChildren(IEnumerable<IView> children, Func<IView, Size> processFunc)
+	Size ProcessChildren(IEnumerable<IView> children, Func<IView, Size> processFunc)
     {
         double width = 0;
         double height = 0;
